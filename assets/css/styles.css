@@ -15,7 +15,7 @@ section{
 .landing-page{
     position: relative;
     min-height: 100vh;
-    background: url(../images/3.jpg);
+    background: url(/assets/images/bright-future.jpg);
     background-size: cover;
     background-position: right;
     display: flex;
@@ -171,7 +171,7 @@ img{
 }
 /*portfolio section styling                      */
 .portfolio{
-    background: url(../images/2.jpg);
+    background: url(/assets/images/milky-way.jpg);
     background-size: cover;
     background-position: right;
 }

@@ -1,0 +1,406 @@
+/*Font*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/*Universal styling*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
+    scroll-behavior: smooth;
+}
+section{
+    padding: 100px;
+}
+/*Front section styling                                */
+.landing-page{
+    position: relative;
+    min-height: 100vh;
+    background: url(../images/3.jpg);
+    background-size: cover;
+    background-position: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.landing-page h1{
+    font-size: 3em;
+    color: #fff;
+    font-weight: 500;
+    line-height: 1.5em;
+}
+.landing-page h2{
+    font-size: 1.5em;
+    color: #fff;
+    font-weight: 500;
+}
+.landing-btn{
+    position: relative;
+    background: #fff;
+    display: inline-block;
+    color: #000;
+    margin-top: 20px;
+    padding: 10px 30px;
+    font-size: 18px;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 2px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.landing-btn:hover{
+    color: #fff;
+    background: #000;
+    display: inline-block;
+    
+}
+/*Header styling                                     */
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px 100px;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.5s;
+}
+/*header sticky in js                                */
+header.sticky{
+    background: #fff;
+    padding: 20px 100px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+header.sticky .logo{
+    color: black;
+} 
+
+.logo {
+    background: url(/images/Roibeard_Ruadhan-1.png);
+}
+header .logo{
+    color: #fff;
+    background: url(/images/Roibeard_Ruadhan-1.png);
+    font-size: 24px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+header ul {
+    position: relative;
+    display: flex;
+}
+header ul li {
+    position: relative;
+    list-style: none;
+}
+header ul li a {
+    position: relative;
+    display: inline-block;
+    margin: 0 15px;
+    color: #fff;
+    text-decoration: none;
+}
+header.sticky ul li a{
+    color: #000;;
+}
+header ul li a::after{
+    content:'';
+    width: 0;
+    height: 3px;
+    background: #ff004f;
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    transition: 0.5s;
+}
+header ul li a:hover::after{
+    width: 100%;
+}
+
+/*about me section styling                          */
+    /*heading styling                                */
+.heading{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #000;
+}
+.heading h1{
+    font-size: 30px;
+    font-weight: 600;
+}
+    /*content box styling                          */
+.content{
+    display: flex;
+    justify-content: space-between;
+}
+.contentBx{
+    padding-right: 30px;
+}
+.contentBx h2{
+    margin-top: 10px;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+.contentBx p span {
+    color: #b30037;
+    font-weight: bold;
+}
+.contentBx a {
+    color: black;
+    text-decoration: none;
+}
+.contentBx i {
+    margin-right: 15px;
+    transition: 0.5s smooth;
+}
+.contentBx i:hover{
+    transform: scale(.9);
+    color: red;
+}
+/*image about me styling                          */
+img{
+    max-width: 100%;
+}
+.w50{
+    min-width: 50%;
+}
+/*portfolio section styling                      */
+.portfolio{
+    background: url(../images/2.jpg);
+    background-size: cover;
+    background-position: right;
+}
+.portfolio .heading h1{
+    color: #fff;
+    font-size: 30px;
+    font-weight: 600;
+}
+.portfolio .heading h2{
+    color: #fff;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+.portfolio .content{
+    display: flex;
+}
+.portfolio .content{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.portfolio .content .portfolioBx{
+    width: 25%;
+    padding: 20px;
+}
+.portfolio .content .portfolioBx img {
+    max-width: 100%;
+    max-height: 75%;
+    transition: 0.9s;
+}
+/*portfolio image styling                       */
+.imageBx:hover{
+    opacity: 0.6;
+    transform: scale(.7);
+}
+/*contact section styling                      */
+/*form box                                     */
+.formBx{
+    min-width: 60%;
+}
+.formBx form{
+    display: flex;
+    flex-direction: column;
+}
+.formBx form h3,
+.contactInfo h3{
+    color: #000;;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+.formBx form input,
+.formBx form textarea {
+    margin-bottom: 20px;
+    padding: 15px;
+    font-size: 16px;
+    border: none; 
+    outline: none;
+    background: #000;
+    color: #fff;
+    resize: none;
+}
+.formBx form textarea {
+    min-height: 200px;
+}
+.formBx form input::placeholder,
+.formBx form textarea::placeholder{
+    color: #fff;
+}
+.formBx form input[type="submit"]{
+    max-width: 100px;
+    background: #000;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: 0.5s smooth;
+}
+.formBx form input[type="submit"]:hover{
+    color: #000;
+    border: 1px solid #000;
+    background: #fff;
+}
+/*contact info styling                   */
+.contactInfoBx .box{
+    position: relative;
+    padding: 20px 0;
+    display: flex;
+}
+
+.contactInfoIcon {
+    min-width: 40px;
+    padding-top: 4px;
+    color: #000;
+    font-size: 20px;
+    column-gap: 10px;
+}
+.contactInfoIcon a{
+    text-decoration: none;
+    color: #000;
+    margin: -6px 0;
+}
+/*footer styling                          */
+.footer{
+    background: #000;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+/*responsive styling */
+/*responsive   991 px                                      */
+@media (max-width: 991px){
+    /*header responsive                                   */
+    header, header.sticky{
+        padding: 20px 50px;
+        z-index: 1000;
+    }
+    header ul li a{
+        color: #000;
+        font-size: 24px;
+        margin: 10px;
+    }
+    header.sticky .toggle{
+        filter: invert(1);
+    }
+    /*hamburger menu                                       */
+    .menu {
+        position: fixed;
+        top: 75px;
+        left: -100%;
+        display: block;
+        padding: 100px 50px;
+        text-align: center;
+        width: 100%;
+        height: 100vh;
+        background: #fff;
+        transition: 0.5s;
+        z-index: 999;
+        border-top: 1px solid rgba(0, 0, 0, 0.2);
+    }
+    .menu.active{
+        left: 0;
+    }
+    .toggle{
+        width: 40px;
+        height: 40px;
+        background: url(../images/menu.png);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 30px;
+        cursor: pointer;
+    }
+    .toggle.active {
+        background: url(../images/close.png);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 25px;
+        cursor: pointer;
+    }
+    /*section responsive                                        */
+    section{
+        padding: 100px 50px;
+    }
+    /*header responsive                                         */
+    header .logo{
+        font-size: 20px;
+    }
+    /*landing page responsive                                       */
+    .landing-page{
+        padding: 150px 50px 100px;
+    }
+    .landing-page h2 {
+        font-size: 1.5em;
+    }
+    .landing-page h3 {
+        font-size: 1em;
+    }
+    /*landing page button style                                 */
+    .landing-btn{
+        margin-top: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+    /*heading responsive                                        */
+    .heading h2{
+        font-size: 24px;
+    }
+    /*about me responsive                                       */
+    .contentBx{
+        font-size: 12px;
+    }
+    .content{
+        flex-direction: column;
+    }
+    .w50{
+        min-width: 50%;
+        margin-bottom: 20px;
+    }
+    /*portfolio boxes responsive                                         */
+    .portfolio .content .portfolioBx{
+        width: 100%;
+        padding: 10px;
+    }
+    /*contact info responsive                                 */
+    .contactInfo{
+        margin: 20px 0;
+    }
+}
+@media (max-width: 600px) {
+    /*header responsive                                         */
+    header, header.sticky{
+        padding: 20px 50px;
+        z-index: 1000;
+    }
+    .landing-page{
+        padding: 150px 20px 100px;
+    }
+    .landing-page h2{
+        font-size: 2em;
+    }
+    /*Section responsive                                      */
+    section{
+        padding: 100px 20px;
+    }
+    img{
+        width: 513px;
+        height: 320px;
+    }
+    img.imageBx{
+        width: 468px;
+        height: 300px;
+    }
+}

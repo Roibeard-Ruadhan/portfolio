@@ -111,7 +111,7 @@ header ul li a::after{
     content:'';
     width: 0;
     height: 3px;
-    background: #ff004f;
+    background: navy;
     position: absolute;
     left: 0;
     bottom: -6px;
@@ -160,7 +160,7 @@ header ul li a:hover::after{
 }
 .contentBx i:hover{
     transform: scale(.9);
-    color: red;
+    color: navy;
 }
 /*image about me styling                          */
 img{

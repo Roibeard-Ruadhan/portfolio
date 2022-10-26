@@ -2,7 +2,5 @@
 ### A personal portfolio site for Roibeard Coughlan.
 ![](http)
 
-[Roibeard_Ruadhan - Live Webpage](https://www.portfolio.roibeardruadhan.com) (Right click top open in new tab)
-
 
 # Porfolio Website

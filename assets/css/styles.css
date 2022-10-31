@@ -15,7 +15,7 @@ section{
 .landing-page{
     position: relative;
     min-height: 100vh;
-    background: url(/assets/images/l-moment.jpg);
+    background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url(/assets/images/l-moment.jpg);
     background-size: cover;
     background-position: right;
     display: flex;
@@ -171,7 +171,7 @@ img{
 }
 /*portfolio section styling                      */
 .portfolio{
-    background: url(/assets/images/earth.jpg);
+    background: url(/assets/images/milky-way.jpg);
     background-size: cover;
     background-position: right;
 }
@@ -360,7 +360,7 @@ img{
     }
     /*about me responsive                                       */
     .contentBx{
-        font-size: 12px;
+        font-size: 15px;
     }
     .content{
         flex-direction: column;

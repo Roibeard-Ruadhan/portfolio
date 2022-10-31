@@ -15,7 +15,7 @@ section{
 .landing-page{
     position: relative;
     min-height: 100vh;
-    background: url(/assets/images/bright-future.jpg);
+    background: url(/assets/images/l-moment.jpg);
     background-size: cover;
     background-position: right;
     display: flex;

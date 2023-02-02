@@ -8,8 +8,27 @@
     font-family: 'Poppins',sans-serif;
     scroll-behavior: smooth;
 }
+
 section{
     padding: 100px;
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    
+}
+/* Dark mode icons */ 
+#icon {
+    width: 30px;
+    cursor: pointer;
+}
+
+:root {
+    --primary-color: #fff;
+    --secondary-color: #212121;
+}
+
+.dark-theme {
+    --primary-color: #212121;
+    --secondary-color: #fff;
 }
 /*Front section styling                                */
 .landing-page{
@@ -35,9 +54,9 @@ section{
 }
 .landing-btn{
     position: relative;
-    background: #fff;
+    background: var(--primary-color);
     display: inline-block;
-    color: #000;
+    color: var(--secondary-color);
     margin-top: 20px;
     padding: 10px 30px;
     font-size: 18px;
@@ -49,8 +68,8 @@ section{
     transition: 0.5s;
 }
 .landing-btn:hover{
-    color: #fff;
-    background: #000;
+    color: var(--secondary-color);
+    background: var(--primary-color);
     display: inline-block;
     
 }
@@ -69,19 +88,19 @@ header{
 }
 /*header sticky in js                                */
 header.sticky{
-    background: #fff;
+    background: var(--primary-color);
     padding: 20px 100px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 header.sticky .logo{
-    color: black;
+    color: var(--secondary-color);
 } 
 
 .logo {
     background: url(/images/Roibeard_Ruadhan-1.png);
 }
 header .logo{
-    color: #fff;
+    color: var(--primary-color);
     background: url(/images/Roibeard_Ruadhan-1.png);
     font-size: 24px;
     text-transform: uppercase;
@@ -101,11 +120,11 @@ header ul li a {
     position: relative;
     display: inline-block;
     margin: 0 15px;
-    color: #fff;
+    color: var(--primary-color);
     text-decoration: none;
 }
 header.sticky ul li a{
-    color: #000;;
+    color: var(--secondary-color);
 }
 header ul li a::after{
     content:'';
@@ -127,7 +146,7 @@ header ul li a:hover::after{
     width: 100%;
     text-align: center;
     margin-bottom: 30px;
-    color: #000;
+    color: var(--secondary-color);
 }
 .heading h1{
     font-size: 30px;
@@ -151,7 +170,7 @@ header ul li a:hover::after{
     font-weight: bold;
 }
 .contentBx a {
-    color: black;
+    color: var(--secondary-color);
     text-decoration: none;
 }
 .contentBx i {
@@ -174,14 +193,15 @@ img{
     background: url(/assets/images/milky-way.jpg);
     background-size: cover;
     background-position: right;
+    color: #fff;
 }
 .portfolio .heading h1{
-    color: #fff;
+    color: var(--primary-color);
     font-size: 30px;
     font-weight: 600;
 }
 .portfolio .heading h2{
-    color: #fff;
+    color: var(--primary-color);
     font-size: 24px;
     margin-bottom: 10px;
 }
@@ -218,7 +238,7 @@ img{
 }
 .formBx form h3,
 .contactInfo h3{
-    color: #000;;
+    color: var(--secondary-color);
     font-size: 20px;
     font-weight: 500;
     margin-bottom: 10px;
@@ -230,8 +250,8 @@ img{
     font-size: 16px;
     border: none; 
     outline: none;
-    background: #000;
-    color: #fff;
+    background: var(--secondary-color);
+    color: var(--primary-color);
     resize: none;
 }
 .formBx form textarea {
@@ -239,20 +259,20 @@ img{
 }
 .formBx form input::placeholder,
 .formBx form textarea::placeholder{
-    color: #fff;
+    color: var(--primary-color);
 }
 .formBx form input[type="submit"]{
     max-width: 100px;
-    background: #000;
+    background: var(--secondary-color);
     cursor: pointer;
     text-transform: uppercase;
     letter-spacing: 2px;
     transition: 0.5s smooth;
 }
 .formBx form input[type="submit"]:hover{
-    color: #000;
+    color: var(--secondary-color);
     border: 1px solid #000;
-    background: #fff;
+    background: var(--primary-color);
 }
 /*contact info styling                   */
 .contactInfoBx .box{
@@ -264,19 +284,19 @@ img{
 .contactInfoIcon {
     min-width: 40px;
     padding-top: 4px;
-    color: #000;
+    color: var(--secondary-color);
     font-size: 20px;
     column-gap: 10px;
 }
 .contactInfoIcon a{
     text-decoration: none;
-    color: #000;
+    color: var(--secondary-color);
     margin: -6px 0;
 }
 /*footer styling                          */
 .footer{
-    background: #000;
-    color: #fff;
+    background: var(--secondary-color);
+    color: var(--primary-color);
     text-align: center;
     padding: 10px;
 }
@@ -289,7 +309,7 @@ img{
         z-index: 1000;
     }
     header ul li a{
-        color: #000;
+        color: var(--secondary-color);
         font-size: 24px;
         margin: 10px;
     }
@@ -306,7 +326,7 @@ img{
         text-align: center;
         width: 100%;
         height: 100vh;
-        background: #fff;
+        background: var(--primary-color);
         transition: 0.5s;
         z-index: 999;
         border-top: 1px solid rgba(0, 0, 0, 0.2);
@@ -322,6 +342,7 @@ img{
         background-repeat: no-repeat;
         background-size: 30px;
         cursor: pointer;
+        /* border-color: var(--primary-color); */
     }
     .toggle.active {
         background: url(../images/close.png);
@@ -333,6 +354,7 @@ img{
     /*section responsive                                        */
     section{
         padding: 100px 50px;
+        background: var(--primary-color);
     }
     /*header responsive                                         */
     header .logo{

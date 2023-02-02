@@ -24,6 +24,7 @@
                 <li><a href="#portfolio" onclick="toggleMenu();">Portfolio</a></li>
                 <li><a href="#contact" onclick="toggleMenu();">Contact</a></li>
             </ul>
+        <img src="assets/images/moon.png" id="icon">
     </header>
     <!--Front page image and text-->
     <section class="landing-page" id="home">
@@ -171,5 +172,18 @@
     };
 </script>
 <script src="https://kit.fontawesome.com/adea6e81d4.js" crossorigin="anonymous"></script>
+<script>
+    var icon = document.getElementById("icon");
+
+    icon.onclick = function(){
+        document.body.classList.toggle('dark-theme');
+        if(document.body.classList.contains('dark-theme')){
+            icon.src = "assets/images/sun.png"
+        }else{
+            icon.src = "assets/images/moon.png"
+        }
+    }
+
+</script>
 </body>
 </html>

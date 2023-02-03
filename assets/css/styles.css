@@ -18,6 +18,7 @@ section{
 /* Dark mode icons */ 
 #icon {
     width: 30px;
+    max-height: 30px;
     cursor: pointer;
 }
 
@@ -35,6 +36,17 @@ section{
     position: relative;
     min-height: 100vh;
     background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url(/assets/images/l-moment.jpg);
+    background-size: cover;
+    background-position: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dark-theme .landing-page {
+    position: relative;
+    min-height: 100vh;
+    background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url(/assets/images/open-laptop.jpg);
     background-size: cover;
     background-position: right;
     display: flex;
@@ -68,10 +80,9 @@ section{
     transition: 0.5s;
 }
 .landing-btn:hover{
-    color: var(--secondary-color);
-    background: var(--primary-color);
+    color: var(--primary-color);
+    background: var(--secondary-color);
     display: inline-block;
-    
 }
 /*Header styling                                     */
 header{
@@ -96,12 +107,8 @@ header.sticky .logo{
     color: var(--secondary-color);
 } 
 
-.logo {
-    background: url(/images/Roibeard_Ruadhan-1.png);
-}
 header .logo{
     color: var(--primary-color);
-    background: url(/images/Roibeard_Ruadhan-1.png);
     font-size: 24px;
     text-transform: uppercase;
     text-decoration: none;
@@ -316,6 +323,10 @@ img{
     header.sticky .toggle{
         filter: invert(1);
     }
+    #icon {
+        width: 25px;
+        cursor: pointer;
+    }
     /*hamburger menu                                       */
     .menu {
         position: fixed;
@@ -412,6 +423,12 @@ img{
     }
     .landing-page h2{
         font-size: 2em;
+    }
+    #icon {
+        width: 25px;
+        max-height: 25px;
+        cursor: pointer;
+        margin-left: -191%;
     }
     /*Section responsive                                      */
     section{

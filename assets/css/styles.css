@@ -46,7 +46,7 @@ section{
 .dark-theme .landing-page {
     position: relative;
     min-height: 100vh;
-    background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url(/assets/images/open-laptop.jpg);
+    background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url(/assets/images/skyline.jpg);
     background-size: cover;
     background-position: right;
     display: flex;
@@ -197,18 +197,26 @@ img{
 }
 /*portfolio section styling                      */
 .portfolio{
-    background: url(/assets/images/milky-way.jpg);
+    background: url(/assets/images/bright-future.jpg);
     background-size: cover;
     background-position: right;
     color: #fff;
 }
+
+.dark-theme .portfolio {
+    background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url(/assets/images/room-flipped.jpg);
+    background-size: cover;
+    background-position: right;
+    color: #fff;
+}
+
 .portfolio .heading h1{
-    color: var(--primary-color);
+    color: #fff;
     font-size: 30px;
     font-weight: 600;
 }
 .portfolio .heading h2{
-    color: var(--primary-color);
+    color: #fff;
     font-size: 24px;
     margin-bottom: 10px;
 }

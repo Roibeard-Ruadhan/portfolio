@@ -360,8 +360,8 @@ img{
         background-position: center;
         background-repeat: no-repeat;
         background-size: 30px;
+        margin-right: -40px;
         cursor: pointer;
-        /* border-color: var(--primary-color); */
     }
     .toggle.active {
         background: url(../images/close.png);
@@ -436,7 +436,7 @@ img{
         width: 25px;
         max-height: 25px;
         cursor: pointer;
-        margin-left: -191%;
+        margin-left: -221%;
     }
     /*Section responsive                                      */
     section{

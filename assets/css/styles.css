@@ -329,7 +329,7 @@ img{
         margin: 10px;
     }
     header.sticky .toggle{
-        filter: invert(1);
+        filter: contrast(0.1);
     }
     #icon {
         width: 25px;
@@ -356,12 +356,13 @@ img{
     .toggle{
         width: 40px;
         height: 40px;
-        background: url(../images/menu.png);
+        background: url(../images/menu-icon.svg);
         background-position: center;
         background-repeat: no-repeat;
         background-size: 30px;
         margin-right: -40px;
         cursor: pointer;
+        color: var(--secondary-color)!important;
     }
     .toggle.active {
         background: url(../images/close.png);
@@ -421,6 +422,13 @@ img{
     }
 }
 @media (max-width: 600px) {
+    div.toggle .menu .menu.active {
+        background-color:var(--primary-color)!important;
+    }
+    .navbar-inverse .navbar-toggle .icon-bar {
+        background-color: red;
+    }
+
     /*header responsive                                         */
     header, header.sticky{
         padding: 20px 50px;

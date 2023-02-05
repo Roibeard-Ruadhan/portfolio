@@ -362,7 +362,7 @@ img{
         background-size: 30px;
         margin-right: -40px;
         cursor: pointer;
-        color: var(--secondary-color)!important;
+        filter: contrast(0.1);
     }
     .toggle.active {
         background: url(../images/close.png);
@@ -422,13 +422,11 @@ img{
     }
 }
 @media (max-width: 600px) {
-    div.toggle .menu .menu.active {
-        background-color:var(--primary-color)!important;
+    .toggle{
+        background-size: 24px;
+        margin-right: -49px;
+        filter: contrast(0.1);
     }
-    .navbar-inverse .navbar-toggle .icon-bar {
-        background-color: red;
-    }
-
     /*header responsive                                         */
     header, header.sticky{
         padding: 20px 50px;
@@ -444,7 +442,7 @@ img{
         width: 25px;
         max-height: 25px;
         cursor: pointer;
-        margin-left: -221%;
+        margin-left: -224%;
     }
     /*Section responsive                                      */
     section{

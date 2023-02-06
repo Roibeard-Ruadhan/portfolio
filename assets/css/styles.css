@@ -15,13 +15,8 @@ section{
     color: var(--secondary-color);
     
 }
-/* Dark mode icons */ 
-#icon {
-    width: 30px;
-    max-height: 30px;
-    cursor: pointer;
-}
 
+/* Dark mode theme */ 
 :root {
     --primary-color: #fff;
     --secondary-color: #212121;
@@ -41,6 +36,7 @@ section{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    /* transition-duration: 1s; */
 }
 
 .dark-theme .landing-page {
@@ -83,6 +79,13 @@ section{
     color: var(--primary-color);
     background: var(--secondary-color);
     display: inline-block;
+}
+
+/* Dark mode icons */ 
+#icon {
+    width: 30px;
+    max-height: 30px;
+    cursor: pointer;
 }
 /*Header styling                                     */
 header{
@@ -346,6 +349,7 @@ img{
         width: 100%;
         height: 100vh;
         background: var(--primary-color);
+        opacity: 0.97;
         transition: 0.5s;
         z-index: 999;
         border-top: 1px solid rgba(0, 0, 0, 0.2);

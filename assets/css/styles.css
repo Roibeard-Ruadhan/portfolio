@@ -81,6 +81,11 @@ section{
     display: inline-block;
 }
 
+
+.textBx h2 {
+
+} 
+
 /* Dark mode icons */ 
 #icon {
     width: 30px;

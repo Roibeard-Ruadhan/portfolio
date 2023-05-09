@@ -19,11 +19,11 @@ section{
 /* Dark mode theme */ 
 :root {
     --primary-color: #fff;
-    --secondary-color: #212121;
+    --secondary-color: #010101;
 }
 
 .dark-theme {
-    --primary-color: #212121;
+    --primary-color: #010101;
     --secondary-color: #fff;
 }
 /*Front section styling                                */
@@ -206,6 +206,14 @@ img{
     height: auto;
     max-height: 690px;
     margin: 40px 0 20px 0;
+}
+
+.dark-theme .img-profile {
+    min-width: 100%;
+    height: auto;
+    max-height: 690px;
+    margin: 40px 0 20px 0;
+    background-image: url(/assets/images/skyline.jpg);
 }
 .w50{
     min-width: 50%;

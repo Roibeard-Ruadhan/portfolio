@@ -200,6 +200,13 @@ header ul li a:hover::after{
 img{
     max-width: 100%;
 }
+
+.img-profile {
+    min-width: 100%;
+    height: auto;
+    max-height: 690px;
+    margin: 40px 0 20px 0;
+}
 .w50{
     min-width: 50%;
 }

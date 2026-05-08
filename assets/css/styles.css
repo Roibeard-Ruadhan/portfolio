@@ -75,10 +75,15 @@ section{
     cursor: pointer;
     transition: 0.5s;
 }
-.landing-btn:hover{
-    color: var(--primary-color);
-    background: var(--secondary-color);
-    display: inline-block;
+.landing-btn.secondary{
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    margin-left: 20px;
+}
+.landing-btn.secondary:hover{
+    background: #fff;
+    color: #010101;
 }
 
 
@@ -218,7 +223,42 @@ img{
 .w50{
     min-width: 50%;
 }
-/*portfolio section styling                      */
+/*services section styling                      */
+.services .content{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.services .serviceBx{
+    width: 30%;
+    padding: 20px;
+    background: var(--secondary-color);
+    color: var(--primary-color);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.services .serviceBx h3{
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+.services .serviceBx p{
+    margin-bottom: 10px;
+}
+.services .serviceBx .price{
+    font-weight: bold;
+    color: navy;
+}
+/*why section styling                      */
+.why .content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.why .contentBx{
+    width: 45%;
+    margin-bottom: 20px;
+}
 .portfolio{
     background: url(/assets/images/bright-future.jpg);
     background-size: cover;
@@ -254,6 +294,17 @@ img{
 .portfolio .content .portfolioBx{
     width: 25%;
     padding: 20px;
+    text-align: center;
+}
+.portfolio .content .portfolioBx h3{
+    color: #fff;
+    font-size: 20px;
+    margin-top: 10px;
+}
+.portfolio .content .portfolioBx p{
+    color: #fff;
+    font-size: 16px;
+    margin-top: 5px;
 }
 .portfolio .content .portfolioBx img {
     max-width: 100%;
@@ -439,6 +490,15 @@ img{
     .portfolio .content .portfolioBx{
         width: 100%;
         padding: 10px;
+    }
+    /*services responsive                                         */
+    .services .serviceBx{
+        width: 100%;
+        padding: 15px;
+    }
+    /*why responsive                                         */
+    .why .contentBx{
+        width: 100%;
     }
     /*contact info responsive                                 */
     .contactInfo{

@@ -208,7 +208,7 @@ header ul li a:hover::after{
 }
 .contentBx i:hover{
     transform: scale(.9);
-    color: navy;
+    color: rgb(136, 136, 136);
 }
 /*image about me styling                          */
 img{
@@ -256,7 +256,7 @@ img{
 }
 .services .serviceBx .price{
     font-weight: bold;
-    color: navy;
+    color: rgb(136, 136, 136);
 }
 /*why section styling                      */
 .why .content{
@@ -463,7 +463,7 @@ img{
     color: var(--primary-color);
 }
 .formBx form input[type="submit"]{
-    max-width: 100px;
+    max-width: min-content;
     background: var(--secondary-color);
     cursor: pointer;
     text-transform: uppercase;

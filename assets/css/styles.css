@@ -102,9 +102,21 @@ section{
 
 /* Dark mode icons */ 
 #icon {
-    width: 30px;
-    max-height: 30px;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    display: block;
     cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s ease, background 0.3s ease, filter 0.3s ease;
+}
+#icon:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.24);
 }
 /*Header styling                                     */
 header{
@@ -112,12 +124,31 @@ header{
     top: 0;
     left: 0;
     width: 100%;
-    padding: 40px 100px;
+    padding: 40px clamp(30px, 4vw, 80px);
     z-index: 1000;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
     transition: 0.5s;
+}
+header .header-actions{
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    flex-shrink: 0;
+}
+header .logo{
+    color: var(--primary-color);
+    font-size: 24px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 2px;
+    white-space: nowrap;
+    flex: 1 1 auto;
+    min-width: 120px;
 }
 /*header sticky in js                                */
 header.sticky{
@@ -547,9 +578,15 @@ img{
         background-position: center;
         background-repeat: no-repeat;
         background-size: 30px;
-        margin-right: -40px;
         cursor: pointer;
         filter: contrast(0.1);
+        border-radius: 12px;
+        background-color: rgba(255, 255, 255, 0.12);
+        transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+    .toggle:hover {
+        transform: scale(1.03);
+        background-color: rgba(255, 255, 255, 0.2);
     }
     .toggle.active {
         background: url(../images/close.png);
@@ -647,13 +684,15 @@ img{
 @media (max-width: 600px) {
     .toggle{
         background-size: 24px;
-        margin-right: -49px;
         filter: contrast(0.1);
     }
     /*header responsive                                         */
     header, header.sticky{
         padding: 20px 20px;
         z-index: 1000;
+    }
+    header .header-actions{
+        gap: 0.75rem;
     }
     .landing-page{
         padding: 120px 20px 80px;
@@ -666,10 +705,12 @@ img{
         line-height: 1.3em;
     }
     #icon {
-        width: 25px;
-        max-height: 25px;
+        width: 30px;
+        height: 30px;
+        min-width: 30px;
+        padding: 6px;
         cursor: pointer;
-        margin-left: -224%;
+        margin-left: 0;
     }
     /*Section responsive                                      */
     section{

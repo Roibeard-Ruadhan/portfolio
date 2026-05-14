@@ -101,10 +101,11 @@ section{
     text-transform: uppercase;
 }
 
-
+/**
 .textBx h2 {
 
 } 
+**/
 
 /* Dark mode icons */ 
 #icon {
@@ -249,21 +250,21 @@ header ul li a:hover::after{
 }
 /*image about me styling                          */
 img{
-    max-width: 100%;
+    max-width: 60%;
 }
 
 .img-profile {
-    min-width: 100%;
+    min-width: 90%;
     height: auto;
-    max-height: 440px;
-    margin: 0px 0 20px 0;
+    max-height: 350px;
+    margin: 0px 0 10px 0;
 }
 
 .dark-theme .img-profile {
-    min-width: 100%;
+    min-width: 90%;
     height: auto;
-    max-height: 690px;
-    margin: 40px 0 20px 0;
+    max-height: 350px;
+    margin: 0px 0 10px 0;
     background-image: url(/assets/images/skyline.jpg);
 }
 .w50{

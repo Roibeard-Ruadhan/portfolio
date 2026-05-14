@@ -255,8 +255,8 @@ img{
 .img-profile {
     min-width: 100%;
     height: auto;
-    max-height: 690px;
-    margin: 40px 0 20px 0;
+    max-height: 440px;
+    margin: 0px 0 20px 0;
 }
 
 .dark-theme .img-profile {

@@ -74,6 +74,10 @@ section{
     font-weight: 500;
     cursor: pointer;
     transition: 0.5s;
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    margin-left: 20px;
 }
 .landing-btn.secondary{
     background: transparent;

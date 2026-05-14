@@ -81,9 +81,12 @@ section{
     color: #fff;
     margin-left: 20px;
 }
+.landing-btn:hover,
 .landing-btn.secondary:hover{
+    transform: translateY(-2px);
     background: #fff;
     color: #010101;
+    border-color: #fff;
 }
 
 .trust-text {

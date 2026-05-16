@@ -91,6 +91,22 @@ section{
     color: #010101;
     border-color: #fff;
 }
+/* Type text on Hero image                  */
+.auto-type {
+    color: #fff;
+}
+
+.hero-title {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #fff;
+    opacity: 0.9;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: 1.2;
+} 
+
+/* Standard text option instead of typetext                    */
 
 .trust-text {
     margin-top: 20px;
@@ -101,11 +117,6 @@ section{
     text-transform: uppercase;
 }
 
-/**
-.textBx h2 {
-
-} 
-**/
 
 /* Dark mode icons */ 
 #icon {

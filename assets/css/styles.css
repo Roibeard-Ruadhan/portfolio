@@ -521,7 +521,7 @@ img{
 }
 .formBx form input[type="submit"]:hover{
     color: var(--secondary-color);
-    border: 1px solid #000;
+    border: 1px solid #FFF;
     background: var(--primary-color);
 }
 /*contact info styling                   */

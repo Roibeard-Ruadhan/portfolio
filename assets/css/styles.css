@@ -154,13 +154,15 @@ h2 { margin-bottom: 0; font-family: var(--serif); font-size: clamp(2.35rem, 5vw,
 .closing-cta .button { white-space: nowrap; }
 
 .site-footer { padding: 2.75rem 0 1.25rem; background: var(--ink-deep); color: var(--white); }
-.footer-main { display: grid; grid-template-columns: 1.25fr .55fr 1fr; gap: clamp(2rem, 6vw, 5rem); align-items: start; }
+.footer-main { display: grid; grid-template-columns: minmax(220px, 1.2fr) .6fr minmax(225px, 1fr) .65fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
 .footer-brand { margin-bottom: .7rem; }
 .footer-brand .brand-mark { border-color: var(--accent-light); }
 .footer-identity p { max-width: 420px; margin: 0; color: #aebebb; font-size: .85rem; }
-.footer-contact { display: grid; gap: .45rem; }
-.footer-contact a, .footer-links a { color: #dce4e1; font-size: .88rem; text-underline-offset: .25rem; }
-.footer-links { display: flex; flex-wrap: wrap; gap: .45rem 1.3rem; }
+.footer-group { display: grid; align-content: start; gap: .42rem; }
+.footer-group a { color: #dce4e1; font-size: .86rem; line-height: 1.45; text-underline-offset: .25rem; }
+.footer-label { margin: 0 0 .35rem; color: #92a6a1; font-size: .68rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.footer-audiences a, .footer-utility a { color: #aebebb; font-size: .8rem; }
+.footer-audiences a span { color: var(--accent-light); }
 .footer-base { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,.16); }
 .footer-base p { margin: 0; color: #92a6a1; font-size: .76rem; }
 
@@ -266,7 +268,8 @@ h2 { margin-bottom: 0; font-family: var(--serif); font-size: clamp(2.35rem, 5vw,
   .opportunity-grid { border-left: 0; }
   .opportunity-grid article { min-height: auto; padding-inline: 0; border-right: 0; }
   .opportunity-grid article > span { margin-bottom: 2rem; }
-  .footer-links { margin-top: .5rem; }
+  .footer-main { gap: 1.6rem; }
+  .footer-base { margin-top: 1.5rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

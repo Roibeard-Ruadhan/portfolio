@@ -29,14 +29,9 @@ document.querySelectorAll('[data-year]').forEach((element) => { element.textCont
 
 const rotatingPhrase = document.querySelector('[data-rotating-phrase]');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-const phrases = [
-  'repetitive admin.',
-  'slow follow-ups.',
-  'disconnected systems.',
-  "work that's become “just part of the job”."
-];
+const phrases = rotatingPhrase?.dataset.phrases?.split('|').filter(Boolean) ?? [];
 
-if (rotatingPhrase && !reduceMotion.matches) {
+if (rotatingPhrase && phrases.length > 1 && !reduceMotion.matches) {
   let phraseIndex = 0;
 
   window.setInterval(() => {

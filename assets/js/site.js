@@ -31,6 +31,51 @@ const rotatingPhrase = document.querySelector('[data-rotating-phrase]');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const phrases = rotatingPhrase?.dataset.phrases?.split('|').filter(Boolean) ?? [];
 
+if (!reduceMotion.matches && 'IntersectionObserver' in window) {
+  const revealSelectors = [
+    '.split-heading',
+    '.problem-grid > article',
+    '.process-grid > li',
+    '.assessment-outcome-copy',
+    '.map-cell',
+    '.service-grid > article',
+    '.about-grid > *',
+    '.booking-grid > *',
+    '.construction-audit-grid > *',
+    '.implementation-statement',
+    '.about-compact-grid > *',
+    '.closing-cta-grid > *'
+  ];
+  const revealItems = document.querySelectorAll(revealSelectors.join(','));
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      revealObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' });
+
+  revealItems.forEach((element) => {
+    const siblings = Array.from(element.parentElement?.children ?? []);
+    const siblingIndex = Math.max(0, siblings.indexOf(element));
+    element.classList.add('reveal-item');
+    element.style.setProperty('--reveal-delay', `${Math.min(siblingIndex, 3) * 80}ms`);
+    revealObserver.observe(element);
+  });
+
+  const progressionItems = document.querySelectorAll('.process-grid, .audit-detail-list');
+  const progressionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-progress-visible');
+      progressionObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.2 });
+
+  progressionItems.forEach((element) => progressionObserver.observe(element));
+  document.body.classList.add('motion-ready');
+}
+
 if (rotatingPhrase && phrases.length > 1 && !reduceMotion.matches) {
   let phraseIndex = 0;
 

@@ -28,8 +28,21 @@ window.addEventListener('scroll', updateHeader, { passive: true });
 document.querySelectorAll('[data-year]').forEach((element) => { element.textContent = new Date().getFullYear(); });
 
 const rotatingPhrase = document.querySelector('[data-rotating-phrase]');
+const operationalFlow = document.querySelector('[data-operational-flow]');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const phrases = rotatingPhrase?.dataset.phrases?.split('|').filter(Boolean) ?? [];
+const flowStates = ['admin', 'followup', 'disconnected', 'handoff', 'normal'];
+
+const playOperationalFlowState = (state) => {
+  if (!operationalFlow) return;
+  operationalFlow.dataset.flowState = state;
+  operationalFlow.classList.remove('is-playing');
+  if (reduceMotion.matches) return;
+  void operationalFlow.offsetWidth;
+  operationalFlow.classList.add('is-playing');
+};
+
+playOperationalFlowState(flowStates[0]);
 
 if (!reduceMotion.matches && 'IntersectionObserver' in window) {
   const revealSelectors = [
@@ -85,6 +98,7 @@ if (rotatingPhrase && phrases.length > 1 && !reduceMotion.matches) {
     window.setTimeout(() => {
       phraseIndex = (phraseIndex + 1) % phrases.length;
       rotatingPhrase.textContent = phrases[phraseIndex];
+      playOperationalFlowState(flowStates[phraseIndex] ?? flowStates[0]);
       rotatingPhrase.classList.remove('is-changing');
     }, 380);
   }, 4800);

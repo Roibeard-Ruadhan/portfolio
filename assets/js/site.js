@@ -35,7 +35,10 @@ const heroVideo = document.querySelector('[data-hero-video]');
 
 if (homeHero && heroVideo) {
   let heroIsVisible = true;
+  const heroPlaybackRate = 0.7;
 
+  heroVideo.defaultPlaybackRate = heroPlaybackRate;
+  heroVideo.playbackRate = heroPlaybackRate;
   const revealVideo = () => heroVideo.classList.add('is-ready');
   const pauseVideo = () => heroVideo.pause();
   const playVideo = () => {

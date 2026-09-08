@@ -28,21 +28,64 @@ window.addEventListener('scroll', updateHeader, { passive: true });
 document.querySelectorAll('[data-year]').forEach((element) => { element.textContent = new Date().getFullYear(); });
 
 const rotatingPhrase = document.querySelector('[data-rotating-phrase]');
-const operationalFlow = document.querySelector('[data-operational-flow]');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const phrases = rotatingPhrase?.dataset.phrases?.split('|').filter(Boolean) ?? [];
-const flowStates = ['admin', 'followup', 'disconnected', 'handoff', 'normal'];
+const homeHero = document.querySelector('[data-home-hero]');
+const heroVideo = document.querySelector('[data-hero-video]');
 
-const playOperationalFlowState = (state) => {
-  if (!operationalFlow) return;
-  operationalFlow.dataset.flowState = state;
-  operationalFlow.classList.remove('is-playing');
-  if (reduceMotion.matches) return;
-  void operationalFlow.offsetWidth;
-  operationalFlow.classList.add('is-playing');
-};
+if (homeHero && heroVideo) {
+  let heroIsVisible = true;
 
-playOperationalFlowState(flowStates[0]);
+  const revealVideo = () => heroVideo.classList.add('is-ready');
+  const pauseVideo = () => heroVideo.pause();
+  const playVideo = () => {
+    if (reduceMotion.matches || !heroIsVisible || document.hidden) return;
+    heroVideo.play().catch(() => {});
+  };
+  const showStaticFrame = () => {
+    pauseVideo();
+
+    const seekToPosterFrame = () => {
+      const posterTime = Number.isFinite(heroVideo.duration)
+        ? Math.min(4.6, Math.max(0, heroVideo.duration - 0.15))
+        : 0;
+
+      if (Math.abs(heroVideo.currentTime - posterTime) < 0.05) {
+        revealVideo();
+        return;
+      }
+
+      heroVideo.addEventListener('seeked', revealVideo, { once: true });
+      heroVideo.currentTime = posterTime;
+    };
+
+    if (heroVideo.readyState >= 1) seekToPosterFrame();
+    else heroVideo.addEventListener('loadedmetadata', seekToPosterFrame, { once: true });
+  };
+  const updateMotionPreference = () => {
+    if (reduceMotion.matches) showStaticFrame();
+    else playVideo();
+  };
+
+  heroVideo.addEventListener('loadeddata', revealVideo, { once: true });
+
+  if ('IntersectionObserver' in window) {
+    const videoObserver = new IntersectionObserver(([entry]) => {
+      heroIsVisible = entry.isIntersecting && entry.intersectionRatio >= 0.12;
+      if (heroIsVisible) playVideo();
+      else pauseVideo();
+    }, { threshold: [0, 0.12, 0.5] });
+    videoObserver.observe(homeHero);
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) pauseVideo();
+    else playVideo();
+  });
+
+  reduceMotion.addEventListener?.('change', updateMotionPreference);
+  updateMotionPreference();
+}
 
 if (!reduceMotion.matches && 'IntersectionObserver' in window) {
   const revealSelectors = [
@@ -98,7 +141,6 @@ if (rotatingPhrase && phrases.length > 1 && !reduceMotion.matches) {
     window.setTimeout(() => {
       phraseIndex = (phraseIndex + 1) % phrases.length;
       rotatingPhrase.textContent = phrases[phraseIndex];
-      playOperationalFlowState(flowStates[phraseIndex] ?? flowStates[0]);
       rotatingPhrase.classList.remove('is-changing');
     }, 380);
   }, 4800);

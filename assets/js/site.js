@@ -90,6 +90,229 @@ if (homeHero && heroVideo) {
   updateMotionPreference();
 }
 
+const constructionHero = document.querySelector('.construction-hero');
+const constructionVideo = document.querySelector('[data-construction-hero-video]');
+const constructionCanvas = document.querySelector('[data-construction-hero-canvas]');
+
+if (constructionHero && constructionVideo && constructionCanvas) {
+  const trimStart = .45;
+  const trimEndPadding = .65;
+  const outputContext = constructionCanvas.getContext('2d', { alpha: false, desynchronized: true });
+  const frames = [];
+  let captureRequest = 0;
+  let playbackTimer = 0;
+  let lastCapturedTime = -1;
+  let frameIndex = 0;
+  let frameDirection = 1;
+  let captureComplete = false;
+  let capturePrepared = false;
+  let preparingCapture = false;
+  let captureEnd = Number.POSITIVE_INFINITY;
+  let heroIsVisible = true;
+
+  const stopCanvasPlayback = () => {
+    if (!playbackTimer) return;
+    window.clearInterval(playbackTimer);
+    playbackTimer = 0;
+  };
+
+  const drawFrame = () => {
+    const frame = frames[frameIndex];
+    if (!frame || !outputContext) return;
+
+    outputContext.drawImage(frame, 0, 0, constructionCanvas.width, constructionCanvas.height);
+    frameIndex += frameDirection;
+
+    if (frameIndex >= frames.length - 1) {
+      frameIndex = frames.length - 1;
+      frameDirection = -1;
+    } else if (frameIndex <= 0) {
+      frameIndex = 0;
+      frameDirection = 1;
+    }
+  };
+
+  const startCanvasPlayback = () => {
+    if (reduceMotion.matches || !heroIsVisible || document.hidden || playbackTimer || frames.length < 2) return;
+    drawFrame();
+    playbackTimer = window.setInterval(drawFrame, 1000 / 30);
+  };
+
+  const captureCurrentFrame = () => {
+    if (constructionVideo.readyState < 2 || constructionVideo.currentTime === lastCapturedTime) return;
+
+    const captureWidth = Math.min(960, constructionVideo.videoWidth);
+    const captureHeight = Math.round(captureWidth * (constructionVideo.videoHeight / constructionVideo.videoWidth));
+    if (!captureWidth || !captureHeight) return;
+
+    const frame = document.createElement('canvas');
+    frame.width = captureWidth;
+    frame.height = captureHeight;
+    frame.getContext('2d', { alpha: false })?.drawImage(constructionVideo, 0, 0, captureWidth, captureHeight);
+    frames.push(frame);
+    lastCapturedTime = constructionVideo.currentTime;
+  };
+
+  const captureWithVideoFrames = () => {
+    if (constructionVideo.currentTime >= captureEnd) {
+      finishCapture();
+      return;
+    }
+    captureCurrentFrame();
+    if (!captureComplete && !constructionVideo.ended) {
+      captureRequest = constructionVideo.requestVideoFrameCallback(captureWithVideoFrames);
+    }
+  };
+
+  const captureWithAnimationFrames = () => {
+    if (constructionVideo.currentTime >= captureEnd) {
+      finishCapture();
+      return;
+    }
+    captureCurrentFrame();
+    if (!captureComplete && !constructionVideo.ended) {
+      captureRequest = window.requestAnimationFrame(captureWithAnimationFrames);
+    }
+  };
+
+  const stopCaptureLoop = () => {
+    if (!captureRequest) return;
+    if ('cancelVideoFrameCallback' in constructionVideo) constructionVideo.cancelVideoFrameCallback(captureRequest);
+    else window.cancelAnimationFrame(captureRequest);
+    captureRequest = 0;
+  };
+
+  const finishCapture = () => {
+    if (captureComplete) return;
+    captureComplete = true;
+    constructionVideo.pause();
+    stopCaptureLoop();
+    if (frames.length < 2 || !outputContext) return;
+
+    constructionCanvas.width = frames[0].width;
+    constructionCanvas.height = frames[0].height;
+    frameIndex = frames.length - 1;
+    frameDirection = -1;
+    drawFrame();
+    constructionCanvas.classList.add('is-active');
+    constructionVideo.classList.add('is-fading-out');
+    window.setTimeout(() => { constructionVideo.style.display = 'none'; }, 760);
+    constructionHero.dataset.boomerangFrames = String(frames.length);
+    constructionHero.dataset.boomerangMemoryMb = String(Math.round((frames.length * frames[0].width * frames[0].height * 4) / 1048576));
+    startCanvasPlayback();
+  };
+
+  const playCaptureVideo = () => {
+    if (reduceMotion.matches || !heroIsVisible || document.hidden || captureComplete) return;
+    constructionVideo.play().catch(() => {});
+  };
+
+  const showReducedMotionFrame = () => {
+    stopCanvasPlayback();
+    constructionVideo.pause();
+
+    if (captureComplete && frames.length) {
+      constructionCanvas.classList.add('is-active');
+      return;
+    }
+
+    const seekToStill = () => {
+      const stillTime = Number.isFinite(constructionVideo.duration)
+        ? Math.min(1.8, Math.max(0, constructionVideo.duration * .42))
+        : 0;
+      constructionVideo.currentTime = stillTime;
+      constructionVideo.classList.add('is-ready');
+    };
+
+    if (constructionVideo.readyState >= 1) seekToStill();
+    else constructionVideo.addEventListener('loadedmetadata', seekToStill, { once: true });
+  };
+
+  const startCapture = () => {
+    if (reduceMotion.matches || captureComplete || !capturePrepared) return;
+    if (!captureRequest) {
+      if ('requestVideoFrameCallback' in constructionVideo) {
+        captureRequest = constructionVideo.requestVideoFrameCallback(captureWithVideoFrames);
+      } else {
+        captureRequest = window.requestAnimationFrame(captureWithAnimationFrames);
+      }
+    }
+    playCaptureVideo();
+  };
+
+  const prepareCapture = () => {
+    if (reduceMotion.matches || captureComplete || capturePrepared || preparingCapture) return;
+    preparingCapture = true;
+
+    const seekToTrimmedStart = () => {
+      captureEnd = Number.isFinite(constructionVideo.duration)
+        ? Math.max(trimStart + .5, constructionVideo.duration - trimEndPadding)
+        : Number.POSITIVE_INFINITY;
+
+      const beginCapture = () => {
+        preparingCapture = false;
+        capturePrepared = true;
+        constructionVideo.classList.add('is-ready');
+        startCapture();
+      };
+
+      if (Math.abs(constructionVideo.currentTime - trimStart) < .03) beginCapture();
+      else {
+        constructionVideo.addEventListener('seeked', beginCapture, { once: true });
+        constructionVideo.currentTime = trimStart;
+      }
+    };
+
+    if (constructionVideo.readyState >= 1) seekToTrimmedStart();
+    else constructionVideo.addEventListener('loadedmetadata', seekToTrimmedStart, { once: true });
+  };
+
+  const updateConstructionMotion = () => {
+    if (reduceMotion.matches) {
+      showReducedMotionFrame();
+      return;
+    }
+
+    if (captureComplete) startCanvasPlayback();
+    else if (capturePrepared) startCapture();
+    else prepareCapture();
+  };
+
+  constructionVideo.addEventListener('loadeddata', () => {
+    updateConstructionMotion();
+  }, { once: true });
+  constructionVideo.addEventListener('ended', finishCapture, { once: true });
+
+  if ('IntersectionObserver' in window) {
+    const constructionVideoObserver = new IntersectionObserver(([entry]) => {
+      heroIsVisible = entry.isIntersecting && entry.intersectionRatio >= .12;
+      if (!heroIsVisible) {
+        constructionVideo.pause();
+        stopCanvasPlayback();
+      } else {
+        updateConstructionMotion();
+      }
+    }, { threshold: [0, .12, .5] });
+    constructionVideoObserver.observe(constructionHero);
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      constructionVideo.pause();
+      stopCanvasPlayback();
+    } else {
+      updateConstructionMotion();
+    }
+  });
+
+  reduceMotion.addEventListener?.('change', updateConstructionMotion);
+  if (constructionVideo.readyState >= 2) {
+    updateConstructionMotion();
+  } else if (reduceMotion.matches) {
+    showReducedMotionFrame();
+  }
+}
+
 if (!reduceMotion.matches && 'IntersectionObserver' in window) {
   const revealSelectors = [
     '.split-heading',

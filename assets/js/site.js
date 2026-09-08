@@ -95,8 +95,9 @@ const constructionVideo = document.querySelector('[data-construction-hero-video]
 const constructionCanvas = document.querySelector('[data-construction-hero-canvas]');
 
 if (constructionHero && constructionVideo && constructionCanvas) {
-  const trimStart = .45;
-  const trimEndPadding = .65;
+  const trimStart = .72;
+  const trimEndPadding = .85;
+  const handoffDuration = 640;
   const outputContext = constructionCanvas.getContext('2d', { alpha: false, desynchronized: true });
   const frames = [];
   let captureRequest = 0;
@@ -104,7 +105,10 @@ if (constructionHero && constructionVideo && constructionCanvas) {
   let lastCapturedTime = -1;
   let frameIndex = 0;
   let frameDirection = 1;
+  let frameStart = 0;
+  let frameEnd = 0;
   let captureComplete = false;
+  let handoffComplete = false;
   let capturePrepared = false;
   let preparingCapture = false;
   let captureEnd = Number.POSITIVE_INFINITY;
@@ -116,24 +120,27 @@ if (constructionHero && constructionVideo && constructionCanvas) {
     playbackTimer = 0;
   };
 
-  const drawFrame = () => {
-    const frame = frames[frameIndex];
+  const renderFrame = (index) => {
+    const frame = frames[index];
     if (!frame || !outputContext) return;
-
     outputContext.drawImage(frame, 0, 0, constructionCanvas.width, constructionCanvas.height);
+  };
+
+  const drawFrame = () => {
+    renderFrame(frameIndex);
     frameIndex += frameDirection;
 
-    if (frameIndex >= frames.length - 1) {
-      frameIndex = frames.length - 1;
+    if (frameIndex >= frameEnd) {
+      frameIndex = frameEnd;
       frameDirection = -1;
-    } else if (frameIndex <= 0) {
-      frameIndex = 0;
+    } else if (frameIndex <= frameStart) {
+      frameIndex = frameStart;
       frameDirection = 1;
     }
   };
 
   const startCanvasPlayback = () => {
-    if (reduceMotion.matches || !heroIsVisible || document.hidden || playbackTimer || frames.length < 2) return;
+    if (!handoffComplete || reduceMotion.matches || !heroIsVisible || document.hidden || playbackTimer || frames.length < 2) return;
     drawFrame();
     playbackTimer = window.setInterval(drawFrame, 1000 / 30);
   };
@@ -154,7 +161,7 @@ if (constructionHero && constructionVideo && constructionCanvas) {
   };
 
   const captureWithVideoFrames = () => {
-    if (constructionVideo.currentTime >= captureEnd) {
+    if (constructionVideo.currentTime >= captureEnd - .045) {
       finishCapture();
       return;
     }
@@ -165,7 +172,7 @@ if (constructionHero && constructionVideo && constructionCanvas) {
   };
 
   const captureWithAnimationFrames = () => {
-    if (constructionVideo.currentTime >= captureEnd) {
+    if (constructionVideo.currentTime >= captureEnd - .045) {
       finishCapture();
       return;
     }
@@ -191,15 +198,22 @@ if (constructionHero && constructionVideo && constructionCanvas) {
 
     constructionCanvas.width = frames[0].width;
     constructionCanvas.height = frames[0].height;
-    frameIndex = frames.length - 1;
+    const loopInset = Math.min(3, Math.max(1, Math.floor(frames.length * .015)));
+    frameStart = loopInset;
+    frameEnd = Math.max(frameStart + 1, frames.length - 1 - loopInset);
+    frameIndex = frameEnd;
     frameDirection = -1;
-    drawFrame();
+    renderFrame(frameIndex);
     constructionCanvas.classList.add('is-active');
     constructionVideo.classList.add('is-fading-out');
-    window.setTimeout(() => { constructionVideo.style.display = 'none'; }, 760);
+    window.setTimeout(() => {
+      constructionVideo.style.display = 'none';
+      handoffComplete = true;
+      frameIndex = Math.max(frameStart, frameEnd - 1);
+      startCanvasPlayback();
+    }, handoffDuration);
     constructionHero.dataset.boomerangFrames = String(frames.length);
     constructionHero.dataset.boomerangMemoryMb = String(Math.round((frames.length * frames[0].width * frames[0].height * 4) / 1048576));
-    startCanvasPlayback();
   };
 
   const playCaptureVideo = () => {
